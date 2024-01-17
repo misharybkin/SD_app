@@ -32,23 +32,10 @@ class Zakladka1:
             temp_user.truncate()
             temp_user.write(nr_ewidencyjny)
         
-        powershell_script_path = r"C:\aplikacja_moja\jeden_uzytkownik_wiele_skrzynek.ps1"
-        total_steps = 100
-        with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
-            for step in range(total_steps):
-                self.progressbar["value"] = (step / total_steps) * 100
-                self.frame.update_idletasks()  # Оновлення віджетів
-                process.stdout.readline()  # Зчитування виводу PowerShell
-                process.stdout.flush()
-
-            print("Прогрес завершено")
-            stdout, stderr = process.communicate()
+        skrypt = Scripts()
+        skrypt.jeden_user_wiele_sw()
     
-            print("Standard Output:")
-            print(stdout)
     
-            print("Error Output:")
-            print(stderr)
         
 
 #2nd tab content
@@ -81,16 +68,10 @@ class Zakladka2:
         with open ("C:/aplikacja_moja/2 zakładka/user.txt", "w") as temp_user:
             temp_user.truncate()
             temp_user.write(nr_ewidencyjny)
-        powershell_script_path = r"C:\aplikacja_moja\jedna_skrzynka_wiele_uzytkownikow.ps1"
-        with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
-            stdout, stderr = process.communicate()
-    
-            print("Standard Output:")
-            print(stdout)
-    
-            print("Error Output:")
-            print(stderr)
+        skrypt = Scripts()
+        skrypt.jedna_sw_wiele_userow()
         self.progressbar.stop()
+
 
 
 #3rd tab content
@@ -133,6 +114,37 @@ class Scripts:
     def jedna_dg_wiele_userow(self):
         powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jedna_dg_wiele_userow.ps1"
         with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
+            stdout, stderr = process.communicate()
+    
+            print("Standard Output:")
+            print(stdout)
+    
+            print("Error Output:")
+            print(stderr)
+
+    def jedna_sw_wiele_userow(self):
+        powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jedna_skrzynka_wiele_uzytkownikow.ps1"
+        with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
+            stdout, stderr = process.communicate()
+    
+            print("Standard Output:")
+            print(stdout)
+    
+            print("Error Output:")
+            print(stderr)
+        
+
+    def jeden_user_wiele_sw(self):
+        powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jeden_uzytkownik_wiele_skrzynek.ps1"
+        total_steps = 100
+        with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
+            for step in range(total_steps):
+                self.progressbar["value"] = (step / total_steps) * 100
+                self.frame.update_idletasks()  # Оновлення віджетів
+                process.stdout.readline()  # Зчитування виводу PowerShell
+                process.stdout.flush()
+
+            print("Прогрес завершено")
             stdout, stderr = process.communicate()
     
             print("Standard Output:")
