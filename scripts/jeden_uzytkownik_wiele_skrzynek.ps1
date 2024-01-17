@@ -13,5 +13,4 @@ for ($i = 0; $i -ne $lines; $i++){
     Add-MailboxPermission -Identity $skrzynka -User $user -AccessRights FullAccess -Confirm:$false
     Add-RecipientPermission -Identity $skrzynka -Trustee $user -AccessRights SendAs -Confirm:$false
     Write-Output "Użytkownik dodany do skrzynki $skrzynka"
-
 }

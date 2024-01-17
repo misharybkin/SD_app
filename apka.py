@@ -111,6 +111,7 @@ class Zakladka3:
         self.progressbar.stop()
 
 class Scripts:
+    #One distribution group to many users script implementation
     def jedna_dg_wiele_userow(self):
         powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jedna_dg_wiele_userow.ps1"
         with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
@@ -121,7 +122,7 @@ class Scripts:
     
             print("Error Output:")
             print(stderr)
-
+    #One shared mailbox to many users script implementation
     def jedna_sw_wiele_userow(self):
         powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jedna_skrzynka_wiele_uzytkownikow.ps1"
         with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
