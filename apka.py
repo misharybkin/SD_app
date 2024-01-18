@@ -25,10 +25,10 @@ class Zakladka1:
         print(nr_ewidencyjny)
         skrzynki = self.text_var.get("1.0", tk.END)
         print(skrzynki)
-        with open("C:/aplikacja_moja/1 zakładka/pliczek.txt", "w") as temp_skrzynki:
+        with open("C:/aplikacja_moja/SD_app/temporary/jeden_user_wiele_skrzynek/skrzynki.txt", "w") as temp_skrzynki:
             temp_skrzynki.truncate()
             temp_skrzynki.write(skrzynki)
-        with open ("C:/aplikacja_moja/1 zakładka/user.txt", "w") as temp_user:
+        with open ("/aplikacja_moja/SD_app/temporary/jeden_user_wiele_skrzynek/user.txt", "w") as temp_user:
             temp_user.truncate()
             temp_user.write(nr_ewidencyjny)
         
@@ -110,6 +110,42 @@ class Zakladka3:
         skrypt.jedna_dg_wiele_userow()
         self.progressbar.stop()
 
+
+class Zakladka4:
+    def __init__(self, parent, content):
+        self.frame = ttk.Frame(parent)
+        label = tk.Label(self.frame, text=content)
+        self.entry_label = tk.Label(self.frame, text = "Wpisz adres czy nr ewidencyjny osoby:")
+        self.entry_label.pack(pady=5)
+        self.entry_dg = tk.StringVar()
+        self.entry = tk.Entry(self.frame, textvariable=self.entry_dg)
+        self.entry.pack(pady=10)
+        self.text_label = tk.Label(self.frame, text="Podaj listę DG:")
+        self.text_label.pack(pady=10)
+        self.text_numer = tk.Text(self.frame, height=5,  width=30)
+        self.text_numer.pack(pady=10)
+        self.progressbar = ttk.Progressbar(self.frame, length=200, mode="determinate")
+        self.progressbar.pack(pady=5)
+        
+        
+        self.button = tk.Button(self.frame, text="Uruchom polecenie", command=self.on_button_click)
+        self.button.pack(pady=8)
+    def on_button_click(self):
+        self.progressbar.start()
+        nr_ewidencyjny = self.text_numer.get("1.0", tk.END)
+        print(nr_ewidencyjny)
+        user = self.entry_dg.get()
+        
+        with open("C:/aplikacja_moja/SD_app/temporary/jeden_user_wiele_dg/users.txt", "w") as temp_user:
+            temp_user.truncate()
+            temp_user.write(user)
+        with open ("C:/aplikacja_moja/SD_app/temporary/jeden_user_wiele_dg/dg.txt", "w") as temp_dg:
+            temp_dg.truncate()
+            temp_dg.write(nr_ewidencyjny)
+        skrypt = Scripts()
+        skrypt.jedna_dg_wiele_userow()
+        self.progressbar.stop()
+
 class Scripts:
     #One distribution group to many users script implementation
     def jedna_dg_wiele_userow(self):
@@ -137,14 +173,22 @@ class Scripts:
 
     def jeden_user_wiele_sw(self):
         powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\jeden_uzytkownik_wiele_skrzynek.ps1"
-        total_steps = 100
+        
         with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
-            for step in range(total_steps):
-                self.progressbar["value"] = (step / total_steps) * 100
-                self.frame.update_idletasks()  # Оновлення віджетів
-                process.stdout.readline()  # Зчитування виводу PowerShell
-                process.stdout.flush()
-
+            
+            print("Прогрес завершено")
+            stdout, stderr = process.communicate()
+    
+            print("Standard Output:")
+            print(stdout)
+    
+            print("Error Output:")
+            print(stderr)
+    def jeden_user_wiele_dg(self):
+        powershell_script_path = r"C:\aplikacja_moja\SD_app\scripts\wiele_dg_jeden_user.ps1"
+        
+        with subprocess.Popen(['powershell.exe', '-ExecutionPolicy', 'Unrestricted', '-File', powershell_script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
+            
             print("Прогрес завершено")
             stdout, stderr = process.communicate()
     
@@ -174,8 +218,11 @@ class MyApp:
         tab3_content = Zakladka3(self.notebook, "22")
         self.notebook.add(tab3_content.frame, text="1 DG - wiele użytkowników")
 
+        tab4_content = Zakladka4(self.notebook, "22")
+        self.notebook.add(tab4_content.frame, text="1 user - wiele DG")
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = MyApp(root)
-    root.geometry("500x400")
+    root.geometry("700x600")
     root.mainloop()

@@ -1,0 +1,3 @@
+callcenter.faktury@lot.pl
+platnosci.cc@lot.pl
+eknf_faktury@lot.pl
