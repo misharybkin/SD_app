@@ -222,25 +222,6 @@ class MyApp:
         tab4_content = Zakladka4(self.notebook, "22")
         self.notebook.add(tab4_content.frame, text="1 user - wiele DG")
 
-api = Flask(__name__)
-@api.route('/api/jedna_dg_wiele_userow', methods=['POST'])
-def jedna_dg_wiele_userow():
-    data = request.get_json()
-    nr_ewidencyjny = data.get('nr_ewidencyjny')
-    skrzynki = data.get('skrzynki')
-
-    with open("C:/aplikacja_moja/SD_app/temporary/jedna_dg_wiele_userow/dg.txt", "w") as temp_skrzynki:
-        temp_skrzynki.truncate()
-        temp_skrzynki.write(skrzynki)
-
-    with open("C:/aplikacja_moja/SD_app/temporary/jedna_dg_wiele_userow/userzy.txt", "w") as temp_user:
-        temp_user.truncate()
-        temp_user.write(nr_ewidencyjny)
-
-    skrypt = Scripts()
-    skrypt.jedna_dg_wiele_userow()
-
-    return jsonify({'status': 'success'})
 
 
 
@@ -250,4 +231,4 @@ if __name__ == "__main__":
     app = MyApp(root)
     root.geometry("700x600")
     root.mainloop()
-    api.run(debug=True)
+    

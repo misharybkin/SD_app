@@ -17,9 +17,7 @@ def jedna_dg_wiele_userow():
         temp_user.truncate()
         temp_user.write(nr_ewidencyjny)
 
-    skrypt = Scripts()
-    skrypt.jedna_dg_wiele_userow()
-
+    
     return jsonify({'status': 'success'})
 
 if __name__ == '__main__':
