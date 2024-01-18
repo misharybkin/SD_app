@@ -2,8 +2,6 @@
 Import-Module ActiveDirectory
 
 
-
-
 #liczymy linijki ze skrzynkami
 $lines = Get-Content -Path "C:\Users\30002084\Documents\imiona.txt" | Measure-Object -Line | Select-Object -ExpandProperty Lines
 

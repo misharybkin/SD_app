@@ -1,1 +1,1 @@
-Onboarding@lot.pl
+inbox,outbox

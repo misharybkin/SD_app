@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import subprocess
+from flask import Flask, request, jsonify
+
 #1st tab content
 class Zakladka1:
     def __init__(self, parent, content):
@@ -42,7 +44,6 @@ class Zakladka1:
 class Zakladka2:
     def __init__(self, parent, content):
         self.frame = ttk.Frame(parent)
-        label = tk.Label(self.frame, text=content)
         self.entry_label = tk.Label(self.frame, text = "Wpisz adres skrzynki:")
         self.entry_label.pack(pady=5)
         self.entry_var = tk.StringVar()
@@ -221,8 +222,32 @@ class MyApp:
         tab4_content = Zakladka4(self.notebook, "22")
         self.notebook.add(tab4_content.frame, text="1 user - wiele DG")
 
+api = Flask(__name__)
+@api.route('/api/jedna_dg_wiele_userow', methods=['POST'])
+def jedna_dg_wiele_userow():
+    data = request.get_json()
+    nr_ewidencyjny = data.get('nr_ewidencyjny')
+    skrzynki = data.get('skrzynki')
+
+    with open("C:/aplikacja_moja/SD_app/temporary/jedna_dg_wiele_userow/dg.txt", "w") as temp_skrzynki:
+        temp_skrzynki.truncate()
+        temp_skrzynki.write(skrzynki)
+
+    with open("C:/aplikacja_moja/SD_app/temporary/jedna_dg_wiele_userow/userzy.txt", "w") as temp_user:
+        temp_user.truncate()
+        temp_user.write(nr_ewidencyjny)
+
+    skrypt = Scripts()
+    skrypt.jedna_dg_wiele_userow()
+
+    return jsonify({'status': 'success'})
+
+
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = MyApp(root)
     root.geometry("700x600")
     root.mainloop()
+    api.run(debug=True)
