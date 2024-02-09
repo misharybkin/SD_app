@@ -63,10 +63,10 @@ class Zakladka2:
         print(nr_ewidencyjny)
         skrzynki = self.text_var.get("1.0", tk.END)
         print(skrzynki)
-        with open("C:/aplikacja_moja/2 zakładka/pliczek.txt", "w") as temp_skrzynki:
+        with open("/aplikacja_moja/SD_app/temporary/jedna_skrzynka_wiele_userow/users.txt", "w") as temp_skrzynki:
             temp_skrzynki.truncate()
             temp_skrzynki.write(skrzynki)
-        with open ("C:/aplikacja_moja/2 zakładka/user.txt", "w") as temp_user:
+        with open ("/aplikacja_moja/SD_app/temporary/jedna_skrzynka_wiele_userow/skrzynka.txt", "w") as temp_user:
             temp_user.truncate()
             temp_user.write(nr_ewidencyjny)
         skrypt = Scripts()
@@ -144,7 +144,7 @@ class Zakladka4:
             temp_dg.truncate()
             temp_dg.write(nr_ewidencyjny)
         skrypt = Scripts()
-        skrypt.jedna_dg_wiele_userow()
+        skrypt.jeden_user_wiele_dg()
         self.progressbar.stop()
 
 class Scripts:
