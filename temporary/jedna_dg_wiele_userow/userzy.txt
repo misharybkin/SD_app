@@ -1,7 +1,7 @@
-k.sredzinska@lot.pl
-j.michalik@lot.pl
-m.kufel@lot.pl
-w.molesztak@lot.pl
-j.garcarz@lot.pl
-o.kusina@lot.pl
-p.smok@lot.pl
+p.bialek@lotcrew.pl
+n.legowik@lotcrew.pl
+m.koprowski@lotcrew.pl
+m.wardencki@lotcrew.pl
+s.pajak@lotcrew.pl
+m.juzwa@lotcrew.pl
+p.wisniewski@lotcrew.pl

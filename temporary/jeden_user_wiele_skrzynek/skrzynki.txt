@@ -1,2 +1,3 @@
-student@lot.pl
-konkursLOT@lot.pl
+tech.coordination@lot.pl
+techlog.pilots@lot.pl
+add-lot@lot.pl
